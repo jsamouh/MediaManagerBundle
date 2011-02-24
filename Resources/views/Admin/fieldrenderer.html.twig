@@ -1,0 +1,13 @@
+{% extends "TwigBundle::form.html.twig" %}
+
+{% block media_field %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/mediamanager/js/fancybox/jquery.fancybox-1.3.4.css') }}" media="screen" />
+    <script type="text/javascript" src="{{ asset('bundles/mediamanager/js/fancybox/jquery.fancybox-1.3.4.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/mediamanager/js/mediamanager-field.js')}}"></script>
+    
+    <a class="fancybox iframe" href="{{path('media_manager_homepage')}}?iframe&association=true&field_name={{field.name}}&crop_width={{field.options['crop_width']}}&crop_height={{field.options['crop_height']}}" rel="Media Library" title="Media Library">Select a new Media</a><br/>
+    <div class="list-medias-field">
+        {%render "MediaManagerBundle:Admin:list" with {'medias' : field.displayedData, 'field_name' : field.name}%}
+    </div>
+      <br clear="both"/>
+{% endblock %}

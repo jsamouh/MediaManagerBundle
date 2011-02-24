@@ -1,0 +1,61 @@
+{% extends "MediaManagerBundle::layout.html.twig" %}
+{% block title_h1 %} Media Manager List{% endblock %}
+{% block body %}
+
+<script type="text/javascript">
+    initVariables("{{asset('bundles/mediamanager')}}", "{{path('media_manager_list_media')}}");
+</script>
+
+<div class="mediamanager-actions">
+    <a href="{{ path('media_manager_add_media') }}" title="Create a new Media">Create a new Media</a>
+</div>
+
+<form action="{{path('media_manager_batch_actions')}}" method="post">
+
+    <div class="mediamanager-list">
+        <table border="1" width="100%" style="text-align:center" id="tableMediaManagerList">
+            <tr>
+                <th><input type="checkbox" id="checkboxAll" /></th>
+        	    <th>Image</th>
+        	    <th>Informations</th>
+                <th>Type</th>
+        	    <th>Size</th>
+        	    <th>Created At</th>
+                <th>Actions</th>        	    
+        	</tr>
+        {% for media in medias %}
+            <tr>
+                <td><input type="checkbox" name="actions[]" value="{{media.id}}" /></td>
+                <td>
+                    <a class="lightbox" href="{{ path('media_manager_view_media_original', {'media_id' : media.id}) }}" title="{{media.title}} ">
+                        <img src="{{ path('media_manager_view_media', {'media_id' : media.id}) }}" width="70" height="70" alt="{{media.title}} "/>
+                    </a>
+                </td>
+                <td style="text-align:left">
+                    <span class="media-title">{{media.title}}</span><br/>
+                    <span class="media-description">{{media.description}}</span><br/>
+                    <span class="media-mimtype">{{media.mimetype}}</span>
+                </td>
+                <td>{{media.type}}</td>
+                <td>{{"%2F Ko"|format(media.size / 10000)}}</td>
+                <td>{{media.createdAt|date("d/m/Y")}}</td>
+                <td>
+                    <a href="{{path('media_manager_edit_media', {'media_id' : media.id})}}">edit</a>
+                    <a id="{{media.id}}" href="#" class="media-associate">associate</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+        <div class="mediamanager-batch-actions">
+            <select id="selectAction" name="action_name">
+                <option value=""></option>
+                <option value="_delete">Delete medias</option>
+                <option value="_associate">Associate medias</option>
+            </select>
+        </div>
+        
+    </div>    
+    
+</form>
+{% endblock %}

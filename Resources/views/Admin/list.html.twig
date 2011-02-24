@@ -1,0 +1,9 @@
+{% for media in medias %}
+<div style="float:left;margin:5px;"> 
+        <a href="{{ path('media_manager_view_media_original', {'media_id' : media.id}) }}" title="{{media.title}} ">
+            <img src="{{ path('media_manager_view_media', {'media_id' : media.id}) }}" width="70" height="70" alt="{{media.title}} "/>
+        </a>
+        <input type="hidden" id="{{field_name}}[][]" name="{{field_name}}[][]" value="{{media.id}}"/>
+        <br/><a href="#" class="media-delete">delete</a>
+</div>        
+{% endfor %}
