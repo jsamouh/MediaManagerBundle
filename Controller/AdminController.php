@@ -80,7 +80,10 @@ class AdminController extends Controller
         $form        = MediaForm::create($this->get('form.context'), 'media');
         $media     = ($this->get('request')->get('media_id', null)) ? $em->getRepository('yProx\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id')) : new Media();
         
+        if (!$media->getId()) $media->setCreatedAt(new \DateTime('now'));
+        $media->setUpdatedAt(new \DateTime('now'));
         $media->setType(MediaType::IMAGE);
+        
         $form->bind($this->get('request'), $media);
 
         if ('POST' == $this->get('request')->getMethod()) 
@@ -89,7 +92,9 @@ class AdminController extends Controller
             {
             	$this->processAddingMediaFile($media);
                 $this->get('session')->setFlash('message-notice', 'Your media has been created');
-                return $this->redirect($this->generateUrl('media_manager_homepage', array()));
+                 //Fix me create a response object when symfony 2 will be ready :-(
+                header('Location: '.$this->generateUrl('media_manager_homepage', array()));
+                exit;
             }
         }
         

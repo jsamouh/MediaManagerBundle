@@ -1,6 +1,7 @@
 {% extends "TwigBundle::form.html.twig" %}
 
-{% block media_field %}
+{% block media_field %}    
+    <script type="text/javascript" src="{{ asset('bundles/mediamanager/js/jquery-1.4.4.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/mediamanager/js/fancybox/jquery.fancybox-1.3.4.css') }}" media="screen" />
     <script type="text/javascript" src="{{ asset('bundles/mediamanager/js/fancybox/jquery.fancybox-1.3.4.js')}}"></script>
     <script type="text/javascript" src="{{ asset('bundles/mediamanager/js/mediamanager-field.js')}}"></script>

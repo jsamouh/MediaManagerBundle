@@ -9,18 +9,11 @@ namespace yProx\MediaManagerBundle\Tests\MediaManagerUpload;
 use yProx\MediaManagerBundle\Enums\MediaType;
 use yProx\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
 use yProx\MediaManagerBundle\Entity\Media;
-use yProx\CmsBundle\Test\DoctrineTest;
 use Doctrine\DBAL\Types\Type;
 
-class MediaManagerUploadTest extends DoctrineTest
+class MediaManagerUploadTest
 {
-	
-    public function getClassNames()
-    {
-        return array(
-            'yProx\MediaManagerBundle\Entity\Media'
-        );
-    }	
+
 	
     /**
      * setup object to do unit test

@@ -73,14 +73,12 @@ class MediaController extends Controller
     {        
         $date = clone $media->getUpdatedAt();
         $date->setTimezone(new \DateTimeZone('UTC'));
-        
-        $header = array('Content-Type'  => $media->getMimeType(),
-                                /*'Etag'              => md5($media->getId()),
-                                'max-age'        => 0,
-                                'Last-Modified' => $date->format('D, d M Y H:i:s').' GMT',
-                                'Cache-Control' => 'must-revalidate'*/
-                                );
-        return $this->createResponse($source, 200, $header);
+
+        // Fix me create a response object when symfony 2 will be ready :-(
+        header('Content-Type: '.$media->getMimeType());
+        header('Content-Length: '.strlen($source));
+        echo $source;
+        exit;
     }
     
 }
