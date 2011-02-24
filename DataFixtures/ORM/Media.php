@@ -27,6 +27,8 @@ class LoadMediaData implements FixtureInterface
     	$media_1->setTitle('My First Image');
     	$media_1->setDescription('This is my first image...');
     	$media_1->setType(MediaType::IMAGE);
+    	$media_1->setCreatedAt(new \DateTime('now'));
+    	$media_1->setUpdatedAt(new \DateTime('now'));
     	
     	$media_manager_upload = new MediaManagerUpload($media_1);
     	$media_manager_upload->loadMediaSourceFromRelativeUrl(dirname(__FILE__).'/../../Resources/public/images/smiley.png');
