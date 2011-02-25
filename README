@@ -1,1 +1,79 @@
-coning soon....
+MediaManagerBundle Installation Instructions
+
+Add Repo in your project
+git submodule add git@github.com:jordscream/MediaManagerBundle.git src/yProx/MediaManagerBundle
+
+Add Imagine lib in your project to manipulate images data
+git submodule add https://github.com/avalanche123/Imagine.git vendor/imagine
+
+Add in registering bundle:
+new yProx\MediaManagerBundle\MediaManagerBundle()
+
+Add in your autoload:
+  'yProx'                         => __DIR__.'/../src',
+  'Imagine'                         =>  '/../vendor/imagine/lib',
+
+Do the commands below to see if everything is ok....
+symfony doctrine:schema:update --force (It must be add new table media)
+
+symfony assets:install web
+
+If you want to add data example do:
+symfony doctrine:data:load
+
+Check if the folder uploads exists in web folder
+
+Configure the new twig configuration to have new renderer field
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources: [MediaManagerBundle:Admin:fieldrenderer.html.twig]    
+
+
+
+
+After that, if you want to have medias associated to your object do the modifications.
+In your entity class:
+class MyObject implements MediaInterface
+{
+    /**
+     * @orm:ManyToMany(targetEntity="yProx\MediaManagerBundle\Entity\Media")
+     */
+    protected $medias;	
+    
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();    	
+    }
+
+    public function getMedias()
+    {
+        return $this->medias;
+    }    
+    
+    public function setMedias(ArrayCollection $medias)
+    {
+        $this->medias = $medias;
+    }
+
+    public function getMedia()
+    {
+        return isset($this->medias[0]) ? $this->medias[0] : new Media();
+    }
+
+}
+
+symfony doctrine:schema:update --force 
+
+In your Entity Form:
+class MyObjectForm{
+      .....
+      $transformer = new CollectionToChoiceTransformer(array(
+            'em' => $this->getOption('entity_manager'),
+            'className' => 'yProx\MediaManagerBundle\Entity\Media'
+        ));
+
+      $this->add(new MediaField('medias', array('value_transformer' => $transformer, 'crop_width' => 200, 'crop_height' => 100)));
+}
