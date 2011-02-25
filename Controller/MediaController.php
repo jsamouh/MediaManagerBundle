@@ -74,11 +74,10 @@ class MediaController extends Controller
         $date = clone $media->getUpdatedAt();
         $date->setTimezone(new \DateTimeZone('UTC'));
 
-        // Fix me create a response object when symfony 2 will be ready :-(
-        header('Content-Type: '.$media->getMimeType());
-        header('Content-Length: '.strlen($source));
-        echo $source;
-        exit;
+        $headers = array(   'Content-Type'      =>  $media->getMimeType(),
+                                    'Content-Length'    =>  strlen($source));
+        
+        return new Response($source, 200, $headers);
     }
     
 }
