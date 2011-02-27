@@ -1,6 +1,6 @@
 <?php
 
-namespace yProx\MediaManagerBundle\Entity;
+namespace Ylly\MediaManagerBundle\Entity;
 
 /**
  * Media Interface to implements medias associations

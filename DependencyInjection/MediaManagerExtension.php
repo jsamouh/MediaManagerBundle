@@ -1,6 +1,6 @@
 <?php
 
-namespace yProx\MediaManagerBundle\DependencyInjection;
+namespace Ylly\MediaManagerBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Extension\Extension;

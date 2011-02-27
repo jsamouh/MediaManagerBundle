@@ -1,6 +1,6 @@
 <?php
 
-namespace yProx\MediaManagerBundle\Form\Field;
+namespace Ylly\MediaManagerBundle\Form\Field;
 
 use Symfony\Component\Form\Field;
 

@@ -1,5 +1,5 @@
 <?php
-namespace yProx\MediaManagerBundle\Enums;
+namespace Ylly\MediaManagerBundle\Enums;
 
 /**
  * Class whichs define possible Media type

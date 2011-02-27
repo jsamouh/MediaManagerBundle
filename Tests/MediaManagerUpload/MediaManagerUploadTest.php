@@ -1,14 +1,14 @@
 <?php
-namespace yProx\MediaManagerBundle\Tests\MediaManagerUpload;
+namespace Ylly\MediaManagerBundle\Tests\MediaManagerUpload;
 
 /**
  * MediaManagerUpload Test For MediaManagerUpload Lib Unit Test
  * @author Jordan Samouh <lifeextension25@gmail.com>
  * version 1.0
  */
-use yProx\MediaManagerBundle\Enums\MediaType;
-use yProx\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
-use yProx\MediaManagerBundle\Entity\Media;
+use Ylly\MediaManagerBundle\Enums\MediaType;
+use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
+use Ylly\MediaManagerBundle\Entity\Media;
 use Doctrine\DBAL\Types\Type;
 
 class MediaManagerUploadTest

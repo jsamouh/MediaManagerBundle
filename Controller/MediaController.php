@@ -1,9 +1,9 @@
 <?php
 
-namespace yProx\MediaManagerBundle\Controller;
+namespace Ylly\MediaManagerBundle\Controller;
 
 
-use yProx\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
+use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
 
 use Zend\GData\App\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +16,7 @@ class MediaController extends Controller
     public function viewAction()
     {
         $em        = $this->get('doctrine.orm.entity_manager');
-        $media    = $em->getRepository('yProx\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id'));
+        $media    = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id'));
         if (!$media)
         {
             throw new HttpException('The media does not exist anymore');
@@ -30,7 +30,7 @@ class MediaController extends Controller
     public function viewOriginalAction()
     {
         $em        = $this->get('doctrine.orm.entity_manager');
-        $media    = $em->getRepository('yProx\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id'));
+        $media    = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id'));
         if (!$media)
         {
             throw new HttpException('The media does not exist anymore');
@@ -49,7 +49,7 @@ class MediaController extends Controller
     	$y                 = $this->get('request')->get('y');
     	$media_id      = $this->get('request')->get('media_id');
         $em               = $this->get('doctrine.orm.entity_manager');
-        $media          = $em->getRepository('yProx\MediaManagerBundle\Entity\Media')->findOneById($media_id);
+        $media          = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($media_id);
     	
         $imagine                    = new \Imagine\Gd\Imagine();
         $file_temp                  = MediaManagerUpload::createTemporaryFile($media);

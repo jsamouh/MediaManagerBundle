@@ -1,18 +1,18 @@
 <?php
 
-namespace yProx\MediaManagerBundle\DataFixtures\ORM;
+namespace Ylly\MediaManagerBundle\DataFixtures\ORM;
 
-use yProx\MediaManagerBundle\Enums\MediaType;
+use Ylly\MediaManagerBundle\Enums\MediaType;
 
-use yProx\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
+use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
 
-use yProx\MediaManagerBundle\Entity\Media;
+use Ylly\MediaManagerBundle\Entity\Media;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use yProx\CrmBundle\Entity\Company;
-use yProx\CrmBundle\Entity\Person;
-use yProx\CrmBundle\Entity\User;
-use yProx\CrmBundle\Entity\Note;
+use Ylly\CrmBundle\Entity\Company;
+use Ylly\CrmBundle\Entity\Person;
+use Ylly\CrmBundle\Entity\User;
+use Ylly\CrmBundle\Entity\Note;
 
 /**
  * Data Fixtures Class to load Media example from url et public resources

@@ -1,6 +1,6 @@
 <?php
 
-namespace yProx\MediaManagerBundle\Form\Admin;
+namespace Ylly\MediaManagerBundle\Form\Admin;
 
 use Symfony\Component\Form\FileField;
 
@@ -9,11 +9,11 @@ use Symfony\Component\Form\HiddenField;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\TextField;
 use Symfony\Component\Form\TextareaField;
-use yProx\CmsBundle\Form\Field\RichTextareaField;
+use Ylly\CmsBundle\Form\Field\RichTextareaField;
 use Symfony\Component\Form\FieldGroup;
 use Symfony\Component\Form\CollectionField;
 
-use yProx\CmsBundle\Inheritance\Form\InheritanceForm;
+use Ylly\CmsBundle\Inheritance\Form\InheritanceForm;
 
 use Doctrine\ORM\EntityManager;
 

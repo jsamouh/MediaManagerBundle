@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace yProx\MediaManagerBundle\Doctrine\ValueTransformer;
+namespace Ylly\MediaManagerBundle\Doctrine\ValueTransformer;
 
 use Symfony\Component\Form\Configurable;
 use Symfony\Component\Form\ValueTransformer\TransformationFailedException;

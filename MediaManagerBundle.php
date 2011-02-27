@@ -1,6 +1,6 @@
 <?php
 
-namespace yProx\MediaManagerBundle;
+namespace Ylly\MediaManagerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -12,17 +12,17 @@ class MediaManagerBundle extends Bundle
 	public function boot()
 	{
 		$em = $this->container->get('doctrine.orm.default_entity_manager');
-		Type::addType('longblob', 'yProx\MediaManagerBundle\Types\LongBlob');
+		Type::addType('longblob', 'Ylly\MediaManagerBundle\Types\LongBlob');
 		$em->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('LONGBLOB', 'longblob');
 		
 		
-		/*$classLoader = new \Doctrine\Common\ClassLoader('yProx', __DIR__."/Behavior");
+		/*$classLoader = new \Doctrine\Common\ClassLoader('Ylly', __DIR__."/Behavior");
         $classLoader->register();
         
         $evm = $em->getEventManager();
         
         
-        $fileableListener = new \yProx\MediaManagerBundle\Behavior\Fileable\FileableListener();
+        $fileableListener = new \Ylly\MediaManagerBundle\Behavior\Fileable\FileableListener();
         $evm->addEventSubscriber($fileableListener);*/
         
 	}

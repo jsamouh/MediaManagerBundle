@@ -4,9 +4,9 @@
  * @author Jordan Samouh <lifeextension25@gmail.com>
  * version 1.0
  */
-use yProx\MediaManagerBundle\Enums\MediaType;
-use yProx\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
-use yProx\MediaManagerBundle\Entity\Media;
+use Ylly\MediaManagerBundle\Enums\MediaType;
+use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
+use Ylly\MediaManagerBundle\Entity\Media;
 
 class MediaTest extends \PHPUnit_Framework_TestCase
 {

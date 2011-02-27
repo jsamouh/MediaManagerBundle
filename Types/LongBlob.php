@@ -1,5 +1,5 @@
 <?php
-namespace yProx\MediaManagerBundle\Types;
+namespace Ylly\MediaManagerBundle\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;

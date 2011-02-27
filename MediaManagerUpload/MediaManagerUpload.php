@@ -1,5 +1,5 @@
 <?php
-namespace yProx\MediaManagerBundle\MediaManagerUpload;
+namespace Ylly\MediaManagerBundle\MediaManagerUpload;
 
 
 /**
@@ -13,7 +13,7 @@ use Imagine\Box;
 
 use Symfony\Component\HttpFoundation\File\File;
 
-use yProx\MediaManagerBundle\Entity\Media;
+use Ylly\MediaManagerBundle\Entity\Media;
 
 class MediaManagerUpload
 {
