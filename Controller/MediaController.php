@@ -3,6 +3,8 @@
 namespace Ylly\MediaManagerBundle\Controller;
 
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
 
 use Zend\GData\App\HttpException;
