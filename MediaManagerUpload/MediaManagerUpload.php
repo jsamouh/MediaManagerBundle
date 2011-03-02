@@ -9,11 +9,8 @@ namespace Ylly\MediaManagerBundle\MediaManagerUpload;
  */
 use Imagine\Gd\Imagine;
 use Imagine\Box;
-
-
 use Symfony\Component\HttpFoundation\File\File;
 
-use Ylly\MediaManagerBundle\Entity\Media;
 
 class MediaManagerUpload
 {
@@ -27,9 +24,9 @@ class MediaManagerUpload
 	 * Constructor Class
 	 * @param Media $media
 	 */
-	public function __construct(Media $media = null)
+	public function __construct($media = null, $model = null)
 	{
-		if (!$media) $media = new Media();
+		if (!$media) $media = new $model();
 		$this->media = $media;
 	}
 	

@@ -27,6 +27,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class AdminController extends Controller
 {
+    public function getEntityMedia()
+    {
+        return $this->get('media_manager.manager')->getEntityMedia();
+    }
+    
+    public function getFormMedia()
+    {
+        return $this->get('media_manager.manager')->getFormMedia();
+    }
+    
+	
     /**
      * Index Action Homepage
      */
@@ -41,7 +52,7 @@ class AdminController extends Controller
     	}
     	
     	$em              = $this->get('doctrine.orm.entity_manager');
-    	$medias        = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findAll();
+    	$medias        = $em->getRepository($this->getEntityMedia())->findAll();
     	$association  = $this->get('request')->get('association', false);
         return $this->render('MediaManagerBundle:Admin:index.html.twig', array('medias' => $medias, 'association' => true));
     }
@@ -51,8 +62,10 @@ class AdminController extends Controller
      */
     public function addAction()
     {
-    	$form    = MediaForm::create($this->get('form.context'), 'media');
+    	$form       = $this->get('media_manager.form');
 
+    	$form->setKey('media');
+    	
     	return $this->render('MediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => new Media()));
     }
     
@@ -62,9 +75,10 @@ class AdminController extends Controller
     public function editAction()
     {
     	$em          = $this->get('doctrine.orm.entity_manager');
-        $form        = MediaForm::create($this->get('form.context'), 'media');
-        $media     = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id'));
+        $form        = $this->get('media_manager.form');
         
+        
+        $media     = $em->getRepository($this->getEntityMedia())->findOneById($this->get('request')->get('media_id'));
         $form->bind($this->get('request'), $media);
         
         return $this->render('MediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => $media));
@@ -77,9 +91,14 @@ class AdminController extends Controller
     public function saveAction()
     {
     	$em          = $this->get('doctrine.orm.entity_manager');
-        $form        = MediaForm::create($this->get('form.context'), 'media');
-        $media     = ($this->get('request')->get('media_id', null)) ? $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($this->get('request')->get('media_id')) : new Media();
+        $form        = $this->get('media_manager.form');
         
+        $model       = $this->getEntityMedia();
+        $media       = ($this->get('request')->get('media_id', null)) ? $em->getRepository($this->getEntityMedia())->findOneById($this->get('request')->get('media_id')) : new $model();
+                
+        $form->setKey('media');
+        $form->addOption('context', $this->get('form.context'));
+                
         if (!$media->getId()) $media->setCreatedAt(new \DateTime('now'));
         $media->setUpdatedAt(new \DateTime('now'));
         $media->setType(MediaType::IMAGE);
@@ -133,7 +152,7 @@ class AdminController extends Controller
         {
 	        foreach($medias as $id)
 	        {
-	           $media = $em->getRepository('Ylly\MediaManagerBundle\Entity\Media')->findOneById($id);
+	           $media = $em->getRepository($this->getEntityMedia())->findOneById($id);
 	           $result[] = $media;  
 	        }
         }
