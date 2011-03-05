@@ -78,7 +78,7 @@ class MediaManagerUpload
 		$this->media = $media;
 	}
 	
-	public static function createTemporaryFile(Media $media, $method='getSource')
+	public static function createTemporaryFile($media, $method='getSource')
 	{
         $file_temp = tempnam('tmp/', 'tmp');
         $handle     = fopen($file_temp, "w");

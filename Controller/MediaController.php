@@ -3,6 +3,9 @@
 namespace Ylly\MediaManagerBundle\Controller;
 
 
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Symfony\Component\HttpFoundation\Response;
 
 use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
@@ -13,17 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MediaController extends Controller
 {
 	
-	public function getEntityMedia()
-	{
-		return $this->get('media_manager.manager')->getEntityMedia();
-	}
     /**
      * action to get the Media thumbnail
      */
     public function viewAction()
     {
-        $em        = $this->get('doctrine.orm.entity_manager');
-        $media    = $em->getRepository($this->getEntityMedia())->findOneById($this->get('request')->get('media_id'));
+        $media    = $this->get('media_manager.manager')->findOneById($this->get('request')->get('media_id'));
         if (!$media)
         {
             throw new HttpException('The media does not exist anymore');
@@ -36,8 +34,7 @@ class MediaController extends Controller
      */
     public function viewOriginalAction()
     {
-        $em        = $this->get('doctrine.orm.entity_manager');
-        $media    = $em->getRepository($this->getEntityMedia())->findOneById($this->get('request')->get('media_id'));
+    	$media    = $this->get('media_manager.manager')->findOneById($this->get('request')->get('media_id'));
         if (!$media)
         {
             throw new HttpException('The media does not exist anymore');
@@ -56,7 +53,7 @@ class MediaController extends Controller
     	$y                 = $this->get('request')->get('y');
     	$media_id      = $this->get('request')->get('media_id');
         $em               = $this->get('doctrine.orm.entity_manager');
-        $media          = $em->getRepository($this->getEntityMedia())->findOneById($media_id);
+        $media    = $this->get('media_manager.manager')->findOneById($media_id);
     	
         $imagine                    = new \Imagine\Gd\Imagine();
         $file_temp                  = MediaManagerUpload::createTemporaryFile($media);
@@ -68,8 +65,8 @@ class MediaController extends Controller
         $media = $media_manager_upload->getMedia();
         $em->persist($media);
         $em->flush();
-        
-        return $this->redirect($this->generateUrl('media_manager_edit_media', array('media_id'  => $media->getId())));
+      
+        return new RedirectResponse($this->get('media_manager.manager')->generateUrl('media_manager_edit_media', array('media_id'  => $media->getId())));
     }
     
     

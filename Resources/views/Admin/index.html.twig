@@ -1,16 +1,17 @@
 {% extends "MediaManagerBundle::layout.html.twig" %}
+{% import "MediaManagerBundle:Helper:routing.html.twig" as paths %}
 {% block title_h1 %} Media Manager List{% endblock %}
-{% block body %}
+{% block content %}
 
 <script type="text/javascript">
-    initVariables("{{asset('bundles/mediamanager')}}", "{{path('media_manager_list_media')}}");
+    initVariables("{{asset('bundles/mediamanager')}}", "{{paths.media_manager_list_media()}}");
 </script>
 
 <div class="mediamanager-actions">
-    <a href="{{ path('media_manager_add_media') }}" title="Create a new Media">Create a new Media</a>
+    <a href="{{ paths.media_manager_add_media() }}" title="Create a new Media">Create a new Media</a>
 </div>
 
-<form action="{{path('media_manager_batch_actions')}}" method="post">
+<form action="{{paths.media_manager_batch_actions()}}" method="post">
 
     <div class="mediamanager-list">
         <table border="1" width="100%" style="text-align:center" id="tableMediaManagerList">
@@ -27,8 +28,8 @@
             <tr>
                 <td><input type="checkbox" name="actions[]" value="{{media.id}}" /></td>
                 <td>
-                    <a class="lightbox" href="{{ path('media_manager_view_media_original', {'media_id' : media.id}) }}" title="{{media.title}} ">
-                        <img src="{{ path('media_manager_view_media', {'media_id' : media.id}) }}" width="70" height="70" alt="{{media.title}} "/>
+                    <a class="lightbox" href="{{ paths.media_manager_view_media_original(media.id)}}" title="{{media.title}} ">
+                        <img src="{{ paths.media_manager_view_media(media.id)}}" width="70" height="70" alt="{{media.title}} "/>
                     </a>
                 </td>
                 <td style="text-align:left">
@@ -40,7 +41,7 @@
                 <td>{{"%2F Ko"|format(media.size / 10000)}}</td>
                 <td>{{media.createdAt|date("d/m/Y")}}</td>
                 <td>
-                    <a href="{{path('media_manager_edit_media', {'media_id' : media.id})}}">edit</a>
+                    <a href="{{ paths.media_manager_edit_media(media.id)}}">edit</a>
                     <a id="{{media.id}}" href="#" class="media-associate">associate</a>
                 </td>
             </tr>

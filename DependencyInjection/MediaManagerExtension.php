@@ -2,6 +2,8 @@
 
 namespace Ylly\MediaManagerBundle\DependencyInjection;
 
+use Symfony\Component\Config\FileLocator;
+
 use Symfony\Component\DependencyInjection\Parameter;
 
 use Symfony\Component\DependencyInjection\Reference;
@@ -12,34 +14,17 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class MediaManagerExtension extends Extension
 {
 	
-	public  function load(array $config, ContainerBuilder $configuration)
+	public  function load(array $config, ContainerBuilder $container)
 	{
-		$this->loadDefaultConfiguration($configuration);
-
-		if (isset($config[0]) && isset($config[0]['class']))
-		{
-            $configuration->setParameter('media_manager.entity.media', $config[0]['class']['model']['media']);
-            $configuration->setParameter('media_manager.form.media',   $config[0]['class']['form']['media']);
-		}
+		// set Parameters
+		$config = $config[0];
+		$container->setParameter('media_manager.manager.namespace', $config['class']['manager']);
+		$container->setParameter('media_manager.media.namespace',   $config['class']['media']);
 		
-        $configuration->register('media_manager.manager', 'Ylly\MediaManagerBundle\Entity\MediaManager')
-                      ->addArgument(new Parameter('media_manager.entity.media'))
-                      ->addArgument(new Parameter('media_manager.form.media'));
-
-		$configuration->register('media_manager.form', new Parameter('media_manager.form.media'));                      
+		
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load("orm.xml");
 	}
-	
-	/**
-	 * Method to load the default configuration of MediaManagerBundle
-	 * @param ContainerBuilder $configuration
-	 */
-	public function loadDefaultConfiguration(ContainerBuilder $configuration)
-	{
-        $configuration->setParameter('media_manager.entity.media', '\Ylly\MediaManagerBundle\Entity\Media');
-        $configuration->setParameter('media_manager.form.media',   '\Ylly\MediaManagerBundle\Form\Admin\Media');
-        		
-	}
-	
 	
     /**
      * @see Symfony\Component\DependencyInjection\Extension.ExtensionInterface::getXsdValidationBasePath()

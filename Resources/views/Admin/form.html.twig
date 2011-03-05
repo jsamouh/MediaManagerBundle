@@ -1,7 +1,9 @@
 {% extends "MediaManagerBundle::layout.html.twig" %}
+{% import "MediaManagerBundle:Helper:routing.html.twig" as paths %}
+
 {% block title_h1 %} Media Manager Upload{% endblock %}
-{% block body %}
-<a href="{{path('media_manager_homepage')}}?iframe&association=true" rel="Media Library" title="Media Library">Back to Media list</a><br/>
+{% block content %}
+<a href="{{paths.media_manager_homepage()}}?iframe&association=true" rel="Media Library" title="Media Library">Back to Media list</a><br/>
 <script type="text/javascript">
 	$(document).ready(function() {
 	  $('#media_source_file').uploadify({
@@ -28,7 +30,7 @@
 	});
 </script>
 
-<form action="{{path('media_manager_save_media')}}" method="post">
+<form action="{{paths.media_manager_save_media()}}" method="post">
     <div class="form">
         <fieldset>
             <legend>Details</legend>
@@ -39,7 +41,7 @@
               {% endif %}
             <div id="list_images">
                 {% if media.id %}
-                    <img src="{{path('media_manager_view_media', {'media_id' : media.id})}}" width="100" height="100" id="preview"/>
+                    <img src="{{paths.media_manager_view_media(media.id)}}" width="100" height="100" id="preview"/>
                 {% endif %}
             </div>
         </fieldset>
@@ -50,9 +52,9 @@
 
 {%if media.id %}
 <h2>Orginal Format -- Crop your image</h2>
-<form action="{{path('media_manager_crop_media')}}" method="post">
+<form action="{{paths.media_manager_crop_media()}}" method="post">
     <div class="crop-block">
-        <img src="{{path('media_manager_view_media_original', {'media_id' : media.id})}}}}" id="imageCrop" />
+        <img src="{{paths.media_manager_view_media_original(media.id)}}" id="imageCrop" />
         <input type="hidden" id="x" name="x" />
         <input type="hidden" id="y" name="y" />
         <input type="hidden" id="w" name="w" />

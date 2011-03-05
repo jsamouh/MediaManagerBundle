@@ -1,0 +1,38 @@
+{% macro media_manager_list_media() %}
+{{path('media_manager_list_media')}}
+{% endmacro %}
+
+{% macro media_manager_add_media() %}
+{{path('media_manager_add_media')}}
+{% endmacro %}
+
+{% macro media_manager_batch_actions() %}
+{{path('media_manager_batch_actions')}}
+{% endmacro %}
+
+{% macro media_manager_edit_media(media_id) %}
+{{path('media_manager_edit_media', {'media_id' : media_id})}}
+{% endmacro %}
+
+{% macro media_manager_save_media(media_id) %}
+{{path('media_manager_save_media', {'media_id' : media_id})}}
+{% endmacro %}
+
+{% macro media_manager_crop_media(media_id) %}
+{{path('media_manager_crop_media', {'media_id' : media_id})}}
+{% endmacro %}
+
+{% macro media_manager_view_media(media_id) %}
+{{path('media_manager_view_media', {'media_id' : media_id})}}
+{% endmacro %}
+
+{% macro media_manager_view_media_original(media_id) %}
+{{path('media_manager_view_media_original', {'media_id' : media_id})}}
+{% endmacro %}
+
+{% macro media_manager_homepage() %}
+{{path('media_manager_homepage')}}
+{% endmacro %}
+
+
+
