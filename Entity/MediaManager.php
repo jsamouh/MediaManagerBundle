@@ -31,6 +31,11 @@ class MediaManager
 		return new $class();
 	}
 	
+	public function getClass()
+	{
+		return $this->class;
+	}
+	
 	/** //FIX ME!! : Not the right place.... hack to manage the override
 	 * Generate url using router service. Define here to override the redirection in controller
 	 * @param string $route
