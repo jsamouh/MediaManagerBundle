@@ -18,8 +18,14 @@ class MediaManagerExtension extends Extension
 	{
 		// set Parameters
 		$config = $config[0];
-		$container->setParameter('media_manager.manager.namespace', $config['class']['manager']);
-		$container->setParameter('media_manager.media.namespace',   $config['class']['media']);
+		
+		$container->setParameter('media_manager.manager.namespace', 'Ylly\MediaManagerBundle\Entity\MediaManager');
+		$container->setParameter('media_manager.manager.namespace', 'Ylly\MediaManagerBundle\Entity\Media');
+		
+		if (isset($config['class']) && isset($config['class']['manager']))
+		  $container->setParameter('media_manager.manager.namespace', $config['class']['manager']);
+        if (isset($config['class']) && isset($config['class']['media']))		  
+		  $container->setParameter('media_manager.media.namespace',   $config['class']['media']);
 		
 		
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
