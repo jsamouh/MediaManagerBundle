@@ -45,7 +45,7 @@ class AdminController extends Controller
     	$medias        = $this->get('media_manager.manager')->findAllMedias();
     	$medias        = $this->get('media_manager.manager')->findAllMedias();
     	$association  = $this->get('request')->get('association', false);
-        return $this->render('MediaManagerBundle:Admin:index.html.twig', array('medias' => $medias, 'association' => true));
+        return $this->render('YllyMediaManagerBundle:Admin:index.html.twig', array('medias' => $medias, 'association' => true));
     }
 
     /**
@@ -55,7 +55,7 @@ class AdminController extends Controller
     {
     	$form       = MediaForm::create($this->get('form.context'), 'media');
 
-    	return $this->render('MediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => new Media()));
+    	return $this->render('YllyMediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => new Media()));
     }
     
     /**
@@ -68,7 +68,7 @@ class AdminController extends Controller
         
         $form->bind($this->get('request'), $media);
         
-        return $this->render('MediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => $media));
+        return $this->render('YllyMediaManagerBundle:Admin:form.html.twig', array('form' => $form, 'media' => $media));
     }
     
     
@@ -96,7 +96,7 @@ class AdminController extends Controller
             }
         }
         
-        return $this->render('MediaManagerBundle:Admin:form.html.twig', array('form' => $form));
+        return $this->render('YllyMediaManagerBundle:Admin:form.html.twig', array('form' => $form));
     }
     
     /**
@@ -134,7 +134,7 @@ class AdminController extends Controller
 	        }
         }
         
-    	return $this->render('MediaManagerBundle:Admin:list.html.twig', array('medias' => $result, 'field_name' => $field_name));
+    	return $this->render('YllyMediaManagerBundle:Admin:list.html.twig', array('medias' => $result, 'field_name' => $field_name));
     }
     
     

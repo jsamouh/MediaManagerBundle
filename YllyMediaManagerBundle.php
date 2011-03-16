@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Doctrine\DBAL\Types\Type;
 
-class MediaManagerBundle extends Bundle
+class YllyMediaManagerBundle extends Bundle
 {
 	public function boot()
 	{

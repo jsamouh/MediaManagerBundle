@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class MediaManagerExtension extends Extension
+class YllyMediaManagerExtension extends Extension
 {
 	
 	public  function load(array $config, ContainerBuilder $container)
@@ -20,7 +20,7 @@ class MediaManagerExtension extends Extension
 		$config = $config[0];
 		
 		$container->setParameter('media_manager.manager.namespace', 'Ylly\MediaManagerBundle\Entity\MediaManager');
-		$container->setParameter('media_manager.manager.namespace', 'Ylly\MediaManagerBundle\Entity\Media');
+		$container->setParameter('media_manager.media.namespace', 'Ylly\MediaManagerBundle\Entity\Media');
 		
 		if (isset($config['class']) && isset($config['class']['manager']))
 		  $container->setParameter('media_manager.manager.namespace', $config['class']['manager']);
@@ -33,23 +33,18 @@ class MediaManagerExtension extends Extension
 	}
 	
     /**
-     * @see Symfony\Component\DependencyInjection\Extension.ExtensionInterface::getXsdValidationBasePath()
+     * Returns the base path for the XSD files.
      *
-     * @codeCoverageIgnore
+     * @return string The XSD base path
      */
     public function getXsdValidationBasePath()
     {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    /**
-     * @see Symfony\Component\DependencyInjection\Extension.ExtensionInterface::getNamespace()
-     *
-     * @codeCoverageIgnore
-     */
     public function getNamespace()
     {
-        return 'http://www.symfony-project.org/schema/dic/media_manager';
+        return 'http://symfony.com/schema/dic/media_manager';
     }
 
     /**
@@ -59,6 +54,6 @@ class MediaManagerExtension extends Extension
      */
     public function getAlias()
     {
-        return 'media_manager';
+        return 'ylly_media_manager';
     }	
 }

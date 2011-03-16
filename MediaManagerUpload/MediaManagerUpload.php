@@ -8,7 +8,7 @@ namespace Ylly\MediaManagerBundle\MediaManagerUpload;
  * version 1.0
  */
 use Imagine\Gd\Imagine;
-use Imagine\Box;
+use Imagine\Image\Box;
 use Symfony\Component\HttpFoundation\File\File;
 
 
