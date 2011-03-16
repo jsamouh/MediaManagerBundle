@@ -1,16 +1,16 @@
 MediaManagerBundle Installation Instructions
 
 Add Repo in your project
-git submodule add git@github.com:jordscream/MediaManagerBundle.git src/yProx/MediaManagerBundle
+git submodule add git@github.com:jordscream/MediaManagerBundle.git src/Ylly/MediaManagerBundle
 
 Add Imagine lib in your project to manipulate images data
 git submodule add https://github.com/avalanche123/Imagine.git vendor/imagine
 
 Add in registering bundle:
-new yProx\MediaManagerBundle\MediaManagerBundle()
+new Ylly\MediaManagerBundle\YllyMediaManagerBundle()
 
 Add in your autoload:
-  'yProx'                         => __DIR__.'/../src',
+  'Ylly'                         => __DIR__.'/../src',
   'Imagine'                         =>  '/../vendor/imagine/lib',
 
 Do the commands below to see if everything is ok....
@@ -29,7 +29,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     form:
-        resources: [MediaManagerBundle:Admin:fieldrenderer.html.twig]    
+        resources: [YllyMediaManagerBundle:Admin:fieldrenderer.html.twig]    
 
 
 
@@ -39,7 +39,7 @@ In your entity class:
 class MyObject implements MediaInterface
 {
     /**
-     * @orm:ManyToMany(targetEntity="yProx\MediaManagerBundle\Entity\Media")
+     * @orm:ManyToMany(targetEntity="Ylly\MediaManagerBundle\Entity\Media")
      */
     protected $medias;	
     
@@ -72,7 +72,7 @@ class MyObjectForm{
       .....
       $transformer = new CollectionToChoiceTransformer(array(
             'em' => $this->getOption('entity_manager'),
-            'className' => 'yProx\MediaManagerBundle\Entity\Media'
+            'className' => 'Ylly\MediaManagerBundle\Entity\Media'
         ));
 
       $this->add(new MediaField('medias', array('value_transformer' => $transformer, 'crop_width' => 200, 'crop_height' => 100)));
