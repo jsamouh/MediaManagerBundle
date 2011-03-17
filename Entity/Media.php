@@ -8,6 +8,8 @@ namespace Ylly\MediaManagerBundle\Entity;
  * @orm:Entity
  * @orm:Table(name="media") 
  */
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Media
 {
 	/**
@@ -31,13 +33,13 @@ class Media
 	protected $description;
 	
 	/**
-	 * source must be data content / absolute url
+	 * source must be data content / absolute url --> original Source
 	 * @orm:Column(name="source", type="longblob")
 	 */
 	protected $source;
 	
     /**
-     * source must be data content / absolute url
+     * source must be data content / absolute url --> thumbnail Source
      * @orm:Column(name="thumbnailSource", type="longblob")
      */
     protected $thumbnailSource;
@@ -79,6 +81,9 @@ class Media
      */
     protected $updatedAt;
            
+	public function __construct()
+	{
+	}
 	
 	
     /**
@@ -170,6 +175,8 @@ class Media
     {
         return $this->source;
     }
+    
+    
     
 
     /**

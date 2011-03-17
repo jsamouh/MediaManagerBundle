@@ -6,12 +6,14 @@ namespace Ylly\MediaManagerBundle\Tests\MediaManagerUpload;
  * @author Jordan Samouh <lifeextension25@gmail.com>
  * version 1.0
  */
+use Ylly\MediaManagerBundle\Entity\MediaFormat;
+
 use Ylly\MediaManagerBundle\Enums\MediaType;
 use Ylly\MediaManagerBundle\MediaManagerUpload\MediaManagerUpload;
 use Ylly\MediaManagerBundle\Entity\Media;
 use Doctrine\DBAL\Types\Type;
 
-class MediaManagerUploadTest
+class MediaManagerUploadTest extends \PHPUnit_Framework_TestCase
 {
 
 	
@@ -25,6 +27,7 @@ class MediaManagerUploadTest
         $media->setTitle('My First Image');
         $media->setDescription('This is my first Image...');
         $media->setType(MediaType::IMAGE);
+        
         
         $media_manager_upload = new MediaManagerUpload($media);
         $media_manager_upload->loadMediaSourceFromRelativeUrl(dirname(__FILE__).'/../../Resources/public/images/smiley.png');
@@ -45,5 +48,7 @@ class MediaManagerUploadTest
         
         // check data source not empty
         $this->assertTrue(strlen($this->media->getSource()) > 0);
+        
+        
     }
 }

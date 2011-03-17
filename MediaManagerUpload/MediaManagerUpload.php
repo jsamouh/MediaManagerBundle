@@ -1,12 +1,17 @@
 <?php
 namespace Ylly\MediaManagerBundle\MediaManagerUpload;
 
-
 /**
  * This class helps you to do local/remote upload and return a Media Object setted correctly
  * @author Jordan Samouh <lifeextension25@gmail.com>
  * version 1.0
  */
+use Ylly\MediaManagerBundle\Entity\Media;
+
+use Ylly\MediaManagerBundle\Entity\MediaFormat;
+
+use Ylly\MediaManagerBundle\Entity\MediaHasFormat;
+use Doctrine\Common\Collections\ArrayCollection;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Symfony\Component\HttpFoundation\File\File;
@@ -18,7 +23,13 @@ class MediaManagerUpload
 	 * media Object
 	 * @var Media $media
 	 */
-	private $media = null;
+	private $media     = null;
+	
+	/**
+	 * ArrayCollection of MediaFormat Object
+	 * @var ArrayCollection $formats
+	 */
+	private $formats   = null;
 	
 	/**
 	 * Constructor Class
@@ -50,37 +61,52 @@ class MediaManagerUpload
 	public function loadMediaSourceFromRelativeUrl($relative_url, $options = array())
 	{
 		$file     = new File($relative_url);
-        
-		if (isset($options['crop_width']) && isset($options['crop_height']))
-        {
+
+		if (isset($options['cropWidth']) && isset($options['cropHeight']))
+		{
             $imagine                    = new Imagine();
-            $image                       = $imagine->open($relative_url);
-            $relative_url                = $relative_url.$file->getExtension();
-            $image->resize(new Box($options['crop_width'], $options['crop_height']))->save($relative_url);
-        }
+            $image                       = $imagine->open($file->getPath());
+            $box                             = new Box($options['cropWidth'], $options['cropHeight']);
+            $image->resize($box)->save($relative_url);
+		}
 		
 		$media = $this->media;
 		$media->setMimeType($file->getMimeType());
 		$media->setExtension($file->getExtension());
 		$media->setSize(filesize($relative_url));
-		$data = file_get_contents($relative_url);
-		$media->setSource($data);
+		$media->setSource(file_get_contents($relative_url));
 		
-		// resize the image to have a thumbnail preview
-		/** FIX ME DEPENDENCY **/
-		$imagine                    = new Imagine();
-        $image                       = $imagine->open($relative_url);
-        $thumbnail_relative_url = $file->getDirectory().'/mini_'.$file->getName();
-        $image->resize(new Box(70, 70))->save($thumbnail_relative_url);
-        $data                          = file_get_contents($thumbnail_relative_url);
-        $media->setThumbnailSource($data);
-        
+		$this->generateAlternativeSource($file);
 		$this->media = $media;
+	}
+	
+	
+	public function generateAlternativeSource(File $file)
+	{
+        $imagine                    = new Imagine();
+        $image                       = $imagine->open($file->getPath());
+        $box                             = new Box(70, 70);
+        $temporaryLocation = tempnam('/tmp', 'generation').$file->getExtension();
+        
+		$image->resize($box)->save($temporaryLocation);
+		$this->media->setThumbnailSource(file_get_contents($temporaryLocation));
+	}
+	
+	public static function getSourceMediaFormat(MediaFormat $format, Media $media)
+	{
+		$file                             = self::createTemporaryFile($media);
+        $imagine                    = new Imagine();
+        $image                       = $imagine->open($file);
+        $box                             = new Box($format->getWidth(), $format->getHeight());
+        $temporaryLocation = tempnam('/tmp', 'generation').$media->getExtension();
+        
+        $image->resize($box)->save($temporaryLocation);
+        return $temporaryLocation;
 	}
 	
 	public static function createTemporaryFile($media, $method='getSource')
 	{
-        $file_temp = tempnam('tmp/', 'tmp');
+        $file_temp = tempnam('tmp/', 'generation');
         $handle     = fopen($file_temp, "w");
         fwrite($handle, $media->getSource());
         fclose($handle);

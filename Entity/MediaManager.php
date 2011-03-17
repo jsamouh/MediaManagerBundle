@@ -19,7 +19,7 @@ class MediaManager
 	{
         $this->class         = $class;
         $this->kernel        = $kernel;
-        $this->container     = $kernel->getContainer();
+        $this->container                    = $kernel->getContainer();
 	}
 	
 	/**

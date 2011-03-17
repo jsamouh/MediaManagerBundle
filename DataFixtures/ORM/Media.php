@@ -35,17 +35,7 @@ class LoadMediaData implements FixtureInterface
     	$media_1 = $media_manager_upload->getMedia();
     	
     	$manager->persist($media_1);
-    	
-    	/*$media_manager_upload = new MediaManagerUpload();
-    	$media_manager_upload->loadMediaSourceFromRemoteUrl('http://www.google.fr/images/nav_logo36.png');
-    	
-    	$media_2 = $media_manager_upload->getMedia();
-    	$media_2->setType(MediaType::IMAGE);
-    	$media_2->setTitle('My Second Image');
-    	$media_2->setDescription('this is my second image loaded from web');
-    	
-    	$manager->persist($media_2);*/
-    	
+    	    	
     	$manager->flush();
     }
 

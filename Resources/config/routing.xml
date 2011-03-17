@@ -12,6 +12,10 @@
         <default key="_controller">YllyMediaManagerBundle:Media:view</default>
         <requirement key="_method">GET</requirement>
     </route>
+    <route id="media_manager_view_media_format" pattern="/media_library/view/{media_id}/format/{format}">
+        <default key="_controller">YllyMediaManagerBundle:Media:viewformat</default>
+        <requirement key="_method">GET</requirement>
+    </route>    
     <route id="media_manager_list_media" pattern="/media_library/list">
         <default key="_controller">YllyMediaManagerBundle:Admin:list</default>
         <requirement key="_method">POST</requirement>

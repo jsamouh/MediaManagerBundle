@@ -23,7 +23,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
 		
 		$media_manager_upload = new MediaManagerUpload($media);
 		$media_manager_upload->loadMediaSourceFromRelativeUrl(dirname(__FILE__).'/../../Resources/public/images/smiley.png');
-		
 		$media         = $media_manager_upload->getMedia();
 		$this->media = $media;
 	}

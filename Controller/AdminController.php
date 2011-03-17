@@ -144,15 +144,15 @@ class AdminController extends Controller
      */
     protected function processAddingMediaFile($media)
     {
-    	$images       = $this->get('request')->get('images', array());
-    	$em             = $this->get('doctrine.orm.entity_manager');
-        $crop_width  = $this->get('request')->getSession()->get('media_manager_filters_crop_width',   null);
-        $crop_height = $this->get('request')->getSession()->get('media_manager_filters_crop_height',  null);
+    	$images            = $this->get('request')->get('images', array());
+    	$em                   = $this->get('doctrine.orm.entity_manager');
+        $cropWidth      = $this->get('request')->getSession()->get('media_manager_filters_crop_width',   null);
+        $cropHeight     = $this->get('request')->getSession()->get('media_manager_filters_crop_height',  null);
     	foreach ($images as $key => $url)
     	{
             $new_media                   =  ($media->getId()) ? $media : clone $media;
             $media_manager_upload = new MediaManagerUpload($new_media);
-            $media_manager_upload->loadMediaSourceFromRelativeUrl($_SERVER["DOCUMENT_ROOT"].$url, array('crop_width' => $crop_width, 'crop_height' => $crop_height));
+            $media_manager_upload->loadMediaSourceFromRelativeUrl($_SERVER["DOCUMENT_ROOT"].$url, array('cropWidth' => $cropWidth, 'cropHeight' => $cropHeight));
             $new_media                   = $media_manager_upload->getMedia();
 
     		$em->persist($new_media);
